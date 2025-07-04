@@ -1,0 +1,35 @@
+{
+  description = "Python Jupyter notebook development shell";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/23.05";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          name = "Python Jupyter";
+          buildInputs = with pkgs; [
+            (python3.withPackages (
+              ps: with ps; [
+                jupyter
+                scipy
+                pandas
+                matplotlib
+              ]
+            ))
+          ];
+        };
+      }
+    );
+}
