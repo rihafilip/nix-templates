@@ -16,10 +16,10 @@
 
         haskell = {
           path = ./haskell;
-          welcomeMessage = ''
+          welcomeText = ''
             # Haskell development shell
 
-            run `stack new PROJECT_NAME --bare ./stack_template/template.hsfiles` to initialize, then you can delete the "stack_template" folder
+            run `stack new PROJECT_NAME --bare ./stack_template/template.hsfiles` to initialize, then you can delete the `stack_template` folder
 
             run `gen-ghie > hie.yaml` to generate the hie
           '';
@@ -35,12 +35,12 @@
 
         python = {
           path = ./python;
-          welcomeMessage = ''
+          welcomeText = ''
             # Python development environment
 
-            pyrightconfig.json, pytest.ini and expect sources in the src folder
+            `pyrightconfig.json`, `pytest.ini` and expect sources in the `src` folder
 
-            Makefile expects the test it the test folder
+            `Makefile` expects the `test` it the test folder
 
             *Edit those if needed*
           '';
@@ -52,7 +52,7 @@
 
         zig = {
           path = ./zig;
-          welcomeMessage = ''
+          welcomeText = ''
             # Zig development shell
 
             run `zig init` to initialize
