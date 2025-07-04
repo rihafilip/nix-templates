@@ -16,11 +16,10 @@
 
         haskell = {
           path = ./haskell;
-          # TODO:
           welcomeMessage = ''
             # Haskell development shell
 
-            run `stack new ` to initialize, then you can delete the "stack_template" folder
+            run `stack new PROJECT_NAME --bare ./stack_template/template.hsfiles` to initialize, then you can delete the "stack_template" folder
 
             run `gen-ghie > hie.yaml` to generate the hie
           '';
