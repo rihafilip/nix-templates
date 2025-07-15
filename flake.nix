@@ -14,6 +14,10 @@
           '';
         };
 
+        empty = {
+          path = ./empty;
+        };
+
         haskell = {
           path = ./haskell;
           welcomeText = ''
