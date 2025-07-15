@@ -7,7 +7,7 @@
       templates = {
         c = {
           path = ./c;
-          welcomeMessage = ''
+          welcomeText = ''
             # C/C++ development shell
 
             The flake contains CMake and make, change if needed
