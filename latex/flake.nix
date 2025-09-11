@@ -24,6 +24,8 @@
             texlive.combined.scheme-full
             latexminted
 
+            gnumake
+
             inkscape
             imagemagick
             pplatex
