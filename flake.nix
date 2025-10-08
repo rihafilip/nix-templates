@@ -54,6 +54,10 @@
           path = ./scala;
         };
 
+        scala-school = {
+          path = ./scala-school;
+        };
+
         zig = {
           path = ./zig;
           welcomeText = ''
