@@ -1,0 +1,13 @@
+BasedOnStyle: llvm
+IndentWidth: 4
+PointerAlignment: Left
+AlwaysBreakTemplateDeclarations: true
+AlignTrailingComments: true
+AllowShortBlocksOnASingleLine: false
+AllowShortLambdasOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+BreakConstructorInitializers: BeforeComma
+AlignAfterOpenBracket: AlwaysBreak
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 120

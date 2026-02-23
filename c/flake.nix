@@ -22,11 +22,11 @@
           name = "C";
           packages = with pkgs; [
             gnumake
+            ninja
             cmake
             gcc
-
-            gdb
-            valgrind
+            # clangd
+            clang-tools
           ];
         };
       }
