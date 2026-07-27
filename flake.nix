@@ -50,6 +50,10 @@
           '';
         };
 
+        rdevel = {
+          path = ./rdevel;
+        };
+
         scala = {
           path = ./scala;
         };
