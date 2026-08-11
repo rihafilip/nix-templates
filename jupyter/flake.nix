@@ -1,35 +1,41 @@
 {
   description = "Python Jupyter notebook development shell";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      flake-utils,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          name = "Python Jupyter";
-          buildInputs = with pkgs; [
-            (python3.withPackages (
-              ps: with ps; [
-                jupyter
-                scipy
-                pandas
-                matplotlib
-              ]
-            ))
-          ];
+      flake-parts,
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+      ];
+
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            name = "Python Jupyter";
+            packages = with pkgs; [
+              (python3.withPackages (
+                ps: with ps; [
+                  jupyter
+                  scipy
+                  pandas
+                  matplotlib
+                ]
+              ))
+            ];
+          };
         };
-      }
-    );
+    };
 }

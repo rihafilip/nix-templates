@@ -3,49 +3,56 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      flake-utils,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        hPkgs = pkgs.haskell.packages."ghc963";
+      flake-parts,
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+      ];
 
-        stack-wrapped = pkgs.symlinkJoin {
-          name = "stack";
-          paths = [ pkgs.stack ];
-          buildInputs = [ pkgs.makeWrapper ];
-          postBuild = ''
-            wrapProgram $out/bin/stack \
-              --add-flags "\
-                --no-nix \
-                --system-ghc \
-                --no-install-ghc \
-              "
-          '';
-        };
+      perSystem =
+        { pkgs, ... }:
+        let
+          hPkgs = pkgs.haskell.packages."ghc963";
 
-        myDevTools = with hPkgs; [
-          ghc
-          stack-wrapped
-          ormolu # Haskell formatter
-          hlint # Haskell codestyle checker
-          haskell-language-server # LSP
-          pkgs.haskellPackages.implicit-hie
-        ];
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          name = "Haskell";
-          buildInputs = myDevTools;
+          stack-wrapped = pkgs.symlinkJoin {
+            name = "stack";
+            paths = [ pkgs.stack ];
+            buildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/stack \
+                --add-flags "\
+                  --no-nix \
+                  --system-ghc \
+                  --no-install-ghc \
+                "
+            '';
+          };
+
+          myDevTools = with hPkgs; [
+            ghc
+            stack-wrapped
+            ormolu # Haskell formatter
+            hlint # Haskell codestyle checker
+            haskell-language-server # LSP
+            pkgs.haskellPackages.implicit-hie
+          ];
+        in
+        {
+          devShells.default = pkgs.mkShell {
+            name = "Haskell";
+            packages = myDevTools;
+          };
         };
-      }
-    );
+    };
 }

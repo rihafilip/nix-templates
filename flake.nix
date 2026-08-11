@@ -7,11 +7,6 @@
       templates = {
         c = {
           path = ./c;
-          welcomeText = ''
-            # C/C++ development shell
-
-            The flake contains CMake and make, change if needed
-          '';
         };
 
         empty = {
@@ -39,15 +34,6 @@
 
         python = {
           path = ./python;
-          welcomeText = ''
-            # Python development environment
-
-            `pyrightconfig.json`, `pytest.ini` and expect sources in the `src` folder
-
-            `Makefile` expects the `test` it the test folder
-
-            *Edit those if needed*
-          '';
         };
 
         rdevel = {

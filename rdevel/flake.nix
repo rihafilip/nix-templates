@@ -18,7 +18,6 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
-        "x86_64-darwin"
       ];
 
       perSystem =
@@ -29,6 +28,7 @@
             packages = with pkgs; [
               clang-tools
             ];
+
             inputsFrom = with pkgs; [
               R
             ];
