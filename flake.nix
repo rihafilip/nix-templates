@@ -40,6 +40,10 @@
           path = ./rdevel;
         };
 
+        rdevel-remote = {
+          path = ./rdevel-remote;
+        };
+
         scala = {
           path = ./scala;
         };
