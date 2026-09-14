@@ -36,6 +36,10 @@
           path = ./python;
         };
 
+        ranalysis = {
+          path = ./ranalysis;
+        };
+
         rdevel = {
           path = ./rdevel;
         };
