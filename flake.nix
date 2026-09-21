@@ -9,6 +9,10 @@
           path = ./c;
         };
 
+        courses = {
+          path = ./courses;
+        };
+
         empty = {
           path = ./empty;
         };
